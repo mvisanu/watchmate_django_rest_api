@@ -40,7 +40,7 @@ python manage.py runserver
 12. Create Superuser -- python manage.py createsuperuser
 user: mvisanu
 email:
-password: password
+password: <your password>
 
 13. run the server again: python manage.py runserver
 http://127.0.0.1:8000/admin/login/?next=/admin/
