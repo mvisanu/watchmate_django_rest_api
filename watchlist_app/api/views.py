@@ -2,8 +2,8 @@ from rest_framework.response import Response
 from rest_framework import status
 #from rest_framework.decorators import api_view
 from rest_framework.views import APIView
-from watchlist_app.models import WatchList, StreamPlatform
-from watchlist_app.api.serializers import WatchListSerializer, StreamPlatformSerializer
+from watchlist_app.models import WatchList, StreamPlatform, Review
+from watchlist_app.api.serializers import WatchListSerializer, StreamPlatformSerializer, ReviewSerializer
 
 
 
@@ -85,7 +85,46 @@ class WatchListDetailAV(APIView):
         movie.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)        
     
+
+
+class ReviewAV(APIView):
+    def get(self, request):
+        reviews = Review.objects.all()
+        serializer = ReviewSerializer(reviews, many=True, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
+    def post(self, request):
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ReviewDetailAV(APIView):
+    
+    def get(self, request, pk):        
+        try:
+            review = Review.objects.get(pk=pk)
+        except Review.DoesNotExist:
+            return Response({'Error': 'Movie not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = ReviewSerializer(review, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def put(self, request,pk):
+        review = Review.objects.get(pk=pk)
+        serializer = ReviewSerializer(movie, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+    def delete(self, request, pk):
+        review = Review.objects.get(pk=pk)
+        review.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)       
 # Function view
 # @api_view(['GET', 'POST'])
 # def movie_list(request):
