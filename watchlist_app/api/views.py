@@ -10,7 +10,7 @@ from watchlist_app.api.serializers import WatchListSerializer, StreamPlatformSer
 class StreamPlatformAV(APIView):
     def get(self, request):
         platforms = StreamPlatform.objects.all()
-        serializer = StreamPlatformSerializer(platforms, many=True)
+        serializer = StreamPlatformSerializer(platforms, many=True,  context={'request': request})       
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def post(self, request):
@@ -29,7 +29,7 @@ class StreamPlatformDetailAV(APIView):
         except StreamPlatform.DoesNotExist:
             return Response({'Error': 'Platform not found'}, status=status.HTTP_404_NOT_FOUND)
         
-        serializer = StreamPlatformSerializer(platform)
+        serializer = StreamPlatformSerializer(platform, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def put(self, request,pk):
@@ -49,7 +49,7 @@ class StreamPlatformDetailAV(APIView):
 class WatchListAV(APIView):
     def get(self, request):
         watchlist = WatchList.objects.all()
-        serializer = WatchListSerializer(watchlist, many=True)
+        serializer = WatchListSerializer(watchlist, many=True, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def post(self, request):
@@ -68,7 +68,7 @@ class WatchListDetailAV(APIView):
         except WatchList.DoesNotExist:
             return Response({'Error': 'Movie not found'}, status=status.HTTP_404_NOT_FOUND)
         
-        serializer = WatchListSerializer(movie)
+        serializer = WatchListSerializer(movie, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def put(self, request,pk):
