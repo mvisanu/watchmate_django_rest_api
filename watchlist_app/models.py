@@ -8,10 +8,11 @@ class StreamPlatform(models.Model):
     def __str__(self):
         return self.name
 
-
+# Add one to one relationship one movie to one platfrom
 class WatchList(models.Model):
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=200)
+    storyline = models.CharField(max_length=200)
+    platform = models.ForeignKey(StreamPlatform, on_delete=models.CASCADE, related_name='watchlist')
     active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     
