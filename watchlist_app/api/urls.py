@@ -11,7 +11,7 @@ urlpatterns = [
    # path('watchlist/', WatchListAV.as_view(), name='watchlist'),
    # path('watchlist/<int:pk>', WatchListDetailAV.as_view(), name='watchlist-detail'),
    path('list/', WatchListAV.as_view(), name='watchlist'),
-   path('<int:pk>', WatchListDetailAV.as_view(), name='watchlist-detail'),
+   path('<int:pk>/', WatchListDetailAV.as_view(), name='watchlist-detail'),
    
    path('', include(router.urls)),
    
@@ -25,9 +25,9 @@ urlpatterns = [
    # path('stream/<int:pk>/reviews/', ReviewList.as_view(), name='review-list'), 
    # path('stream/review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),
    
-   path('<int:pk>/review-create', ReviewCreate.as_view(), name='review-create'), 
+   path('<int:pk>/review-create/', ReviewCreate.as_view(), name='review-create'), 
    path('<int:pk>/reviews/', ReviewList.as_view(), name='review-list'), 
-   path('review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),
+   path('review/<int:pk>/', ReviewDetail.as_view(), name='review-detail'),
    
    #path('review/', ReviewAV.as_view(), name='review'),
    #path('review/<int:pk>', ReviewDetailAV.as_view(), name='review-detail'),
