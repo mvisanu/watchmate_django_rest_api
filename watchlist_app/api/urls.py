@@ -8,15 +8,15 @@ router = DefaultRouter()
 router.register('stream', StreamPlatformVS, basename='StreamPlatform')
 
 urlpatterns = [
-   # path('watchlist/', WatchListAV.as_view(), name='watchlist'),
-   # path('watchlist/<int:pk>', WatchListDetailAV.as_view(), name='watchlist-detail'),
-   path('list/', WatchListAV.as_view(), name='watchlist'),
-   path('<int:pk>/', WatchListDetailAV.as_view(), name='watchlist-detail'),
+    path('watchlist/', WatchListAV.as_view(), name='watchlist'),
+    path('watchlist/<int:pk>', WatchListDetailAV.as_view(), name='watchlist-detail'),
+   # path('list/', WatchListAV.as_view(), name='watchlist'),
+   # path('<int:pk>/', WatchListDetailAV.as_view(), name='watchlist-detail'),
    
    path('', include(router.urls)),
    
-   # path('stream/', StreamPlatformAV.as_view(), name='stream'),
-   # path('stream/<int:pk>', StreamPlatformDetailAV.as_view(), name='streamplatform-detail'),
+   path('stream/', StreamPlatformAV.as_view(), name='stream'),
+   path('stream/<int:pk>', StreamPlatformDetailAV.as_view(), name='streamplatform-detail'),
    
    #path('review/', ReviewList.as_view(), name='review-list'), 
    #path('stream/review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),
