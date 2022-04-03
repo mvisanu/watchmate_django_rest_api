@@ -1,4 +1,5 @@
 #RestFramework import
+from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
@@ -7,9 +8,10 @@ from rest_framework import status
 #from rest_framework import mixins
 from rest_framework import generics
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 # App Import
-from rest_framework.views import APIView
+from watchlist_app.api.permissions import AdminOrReadOnly, ReviewUserOrReadOnly
 from watchlist_app.models import WatchList, StreamPlatform, Review
 from watchlist_app.api.serializers import WatchListSerializer, StreamPlatformSerializer, ReviewSerializer
 
@@ -35,13 +37,16 @@ class ReviewCreate(generics.CreateAPIView):
 class ReviewList(generics.ListCreateAPIView):
     #queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]  # only allow authenticated users to view list
     
     def get_queryset(self):
         pk = self.kwargs['pk']
         return Review.objects.filter(watchlist=pk)
 
 
-class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
+class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):    
+    permission_classes = [ReviewUserOrReadOnly]
+    
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     
