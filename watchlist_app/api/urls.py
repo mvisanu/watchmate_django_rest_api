@@ -8,8 +8,10 @@ router = DefaultRouter()
 router.register('stream', StreamPlatformVS, basename='StreamPlatform')
 
 urlpatterns = [
-   path('watchlist/', WatchListAV.as_view(), name='watchlist'),
-   path('watchlist/<int:pk>', WatchListDetailAV.as_view(), name='watchlist-detail'),
+   # path('watchlist/', WatchListAV.as_view(), name='watchlist'),
+   # path('watchlist/<int:pk>', WatchListDetailAV.as_view(), name='watchlist-detail'),
+   path('list/', WatchListAV.as_view(), name='watchlist'),
+   path('<int:pk>', WatchListDetailAV.as_view(), name='watchlist-detail'),
    
    path('', include(router.urls)),
    
@@ -19,9 +21,13 @@ urlpatterns = [
    #path('review/', ReviewList.as_view(), name='review-list'), 
    #path('stream/review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),
    
-   path('stream/<int:pk>/review-create', ReviewCreate.as_view(), name='review-create'), 
-   path('stream/<int:pk>/review/', ReviewList.as_view(), name='review-list'), 
-   path('stream/review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),
+   # path('stream/<int:pk>/review-create', ReviewCreate.as_view(), name='review-create'), 
+   # path('stream/<int:pk>/reviews/', ReviewList.as_view(), name='review-list'), 
+   # path('stream/review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),
+   
+   path('<int:pk>/review-create', ReviewCreate.as_view(), name='review-create'), 
+   path('<int:pk>/reviews/', ReviewList.as_view(), name='review-list'), 
+   path('review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),
    
    #path('review/', ReviewAV.as_view(), name='review'),
    #path('review/<int:pk>', ReviewDetailAV.as_view(), name='review-detail'),
