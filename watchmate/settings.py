@@ -153,6 +153,11 @@ REST_FRAMEWORK = {
     
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     # 'PAGE_SIZE': 5,
+    
+    # disable browsable admin view
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
 
 }
 
