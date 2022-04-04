@@ -6,19 +6,19 @@ from watchlist_app.api.views import (WatchListAV, WatchListDetailAV, StreamPlatf
                                      StreamPlatformDetailAV, ReviewList, ReviewDetail, 
                                      ReviewCreate, StreamPlatformVS, UserReview, WatchListGV)
 router = DefaultRouter()
-router.register('stream', StreamPlatformVS, basename='StreamPlatform')
+router.register('stream', StreamPlatformVS, basename='streamplatform')
 
 urlpatterns = [
-    path('watchlist/', WatchListAV.as_view(), name='watchlist'),
-    path('watchlist/<int:pk>', WatchListDetailAV.as_view(), name='watchlist-detail'),
-    path('search-list/', WatchListGV.as_view(), name='watchlist'),
+    path('watchlist/', WatchListAV.as_view(), name='movie-list'),
+    path('watchlist/<int:pk>', WatchListDetailAV.as_view(), name='movie-detail'),
+    path('search-list/', WatchListGV.as_view(), name='watch-list'),
    # path('list/', WatchListAV.as_view(), name='watchlist'),
    # path('<int:pk>/', WatchListDetailAV.as_view(), name='watchlist-detail'),
    
    path('', include(router.urls)),
    
-   path('stream/', StreamPlatformAV.as_view(), name='stream'),
-   path('stream/<int:pk>', StreamPlatformDetailAV.as_view(), name='streamplatform-detail'),
+   #path('stream/', StreamPlatformAV.as_view(), name='stream'),
+   #path('stream/<int:pk>', StreamPlatformDetailAV.as_view(), name='stream-detail'),
   
    
    #path('review/', ReviewList.as_view(), name='review-list'), 
@@ -28,7 +28,7 @@ urlpatterns = [
    # path('stream/<int:pk>/reviews/', ReviewList.as_view(), name='review-list'), 
    # path('stream/review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),
    
-   path('<int:pk>/review-create/', ReviewCreate.as_view(), name='review-create'), 
+   path('<int:pk>/reviews-create/', ReviewCreate.as_view(), name='review-create'), 
    path('<int:pk>/reviews/', ReviewList.as_view(), name='review-list'), 
    path('review/<int:pk>/', ReviewDetail.as_view(), name='review-detail'),
    

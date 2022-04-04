@@ -148,7 +148,7 @@ REST_FRAMEWORK = {
         'user': '10/day',
         'review-create': '1/day',
         'review-list': '10/day',
-        'review-detail': '2/day'
+        'review-detail': '5/day'
     },
     
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',

@@ -82,7 +82,7 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     #throttle_classes = [UserRateThrottle, AnonRateThrottle]
-    throttle_classes = [ScopedRateThrottle]
+    throttle_classes = [ScopedRateThrottle, AnonRateThrottle]
     throttle_scope = 'review-detail'
     
     
